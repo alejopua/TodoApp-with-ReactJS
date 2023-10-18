@@ -1,8 +1,11 @@
 import { AppUI } from './AppUI';
+import { TodoProvider } from '../TodoContext';
 
 const App = () => {
   return (
-    <AppUI />
+    <TodoProvider >
+      <AppUI />
+    </TodoProvider>
   )
 }
 

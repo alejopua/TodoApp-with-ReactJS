@@ -10,3 +10,96 @@
     box-sizing: border-box;
     scroll-behavior: smooth;
 }
+
+.selectHeader {
+    @apply bg-black text-white rounded-md font-medium;
+}
+
+.selectHeaderHover {
+    @apply hover:bg-black hover:bg-opacity-25 hover:text-black hover:rounded-md hover:font-medium transition;
+}
+
+.styleTaskWeek {
+    @apply min-w-[1rem] text-center text-[1rem] border border-solid border-black p-[0.2rem] rounded-md inline-block h-fit;
+}
+
+
+@layer components {
+
+    .max-container {
+        max-width: 1440px;
+        margin: 0 auto;
+    }
+
+    .shadowStyle {
+        box-shadow: .4rem .4rem #05060f;
+    }
+
+    .inputModal {
+        width: 250px;
+        height: 40px;
+        border-radius: 5px;
+        border: 2px solid var(--main-color);
+        background-color: var(--bg-color);
+        box-shadow: 4px 4px var(--main-color);
+        font-size: 15px;
+        font-weight: 600;
+        color: var(--font-color);
+        padding: 5px 10px;
+        outline: none;
+    }
+}
+
+@layer utilities {
+    .styleButton {
+        @apply w-14 border-none text-white cursor-pointer ml-[0.13rem] py-px px-1.5 rounded-md text-center;
+    }
+
+    .Description::placeholder {
+        @apply text-[#666] opacity-80;
+    }
+    
+    .Description:focus {
+        @apply border-2 border-solid border-[#664eff];
+    }
+
+    .input:focus {
+        @apply border-2 border-solid border-[#2d8cf0];
+    }
+
+    .input::placeholder {
+        @apply text-[#666] opacity-80;
+    }
+
+    .padding {
+        @apply sm:px-16 px-8 sm:py-24 py-12;
+    }
+
+    .padding-x {
+        @apply sm:px-16 px-8;
+    }
+
+    .padding-y {
+        @apply sm:py-24 py-12;
+    }
+
+    .padding-l {
+        @apply sm:pl-16 pl-8;
+    }
+
+    .padding-r {
+        @apply sm:pr-16 pr-8;
+    }
+
+    .padding-t {
+        @apply sm:pt-24 pt-12;
+    }
+
+    .padding-b {
+        @apply sm:pb-24 pb-12;
+    }
+
+    .info-text {
+        @apply font-montserrat text-slate-gray text-lg leading-7;
+    }
+}
