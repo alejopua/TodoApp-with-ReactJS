@@ -1,5 +1,5 @@
 import { createContext, useState } from "react";
-import { UseLocalStorage } from "../hooks/UseLocalStorage/UseLocalStorage";
+import { UseLocalStorage } from "../hooks/UseLocalStorage";
 import { getDate } from "../helpers/getDate";
 import { getTaskDay } from "../helpers/getTaskDay";
 
