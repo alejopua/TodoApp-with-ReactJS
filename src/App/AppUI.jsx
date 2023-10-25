@@ -20,7 +20,7 @@ import { useContext } from "react";
 function AppUI() {
     const { error, loading, checkTodo, deleteTodo, openModal, tab, listTasksDay } = useContext(TodoContext)
     return (
-            <main className=" h-screen w-full bg-[#eae0d5] flex flex-col font-roboto">
+        <main className=" h-screen w-full bg-[#eae0d5] flex flex-col font-roboto">
             <section className="h-full w-screen flex justify-center items-center">
             <div className="w-96 h-[42.5rem] box-border relative bg-[#00FFA0] p-3 flex flex-col items-center justify-start rounded-xl overflow-hidden border-[.5vmin] border-solid border-black shadowStyle" >
                 <About />
