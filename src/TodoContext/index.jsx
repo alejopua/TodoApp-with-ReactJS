@@ -1,5 +1,5 @@
 import { createContext, useState } from "react";
-import { UseLocalStorage } from "../hooks/UseLocalStorage";
+import { useLocalStorage } from "../hooks/useLocalStorage";
 import { getDate } from "../helpers/getDate";
 import { getTaskDay } from "../helpers/getTaskDay";
 
@@ -11,7 +11,7 @@ function TodoProvider({ children }) {
         saveItem: saveTodos, 
         loading, 
         error
-    } = UseLocalStorage('TODOS_V1', []);
+    } = useLocalStorage('TODOS_V1', []);
 
     const [searchValue, setSearchValue] = useState(''); 
     const [openModal, setOpenModal] = useState(false); 
@@ -30,12 +30,20 @@ function TodoProvider({ children }) {
     const completedTodo = listTasksDay.filter((todo) => !!todo.completed).length;
     const totalTodos = listTasksDay.length;
 
-    const addTodo = (text) => {
+    const getNewTodos = (text) => {
         const newTodos = [...todos]
+        const indexTodo = newTodos.findIndex((todo) => todo.text == text)
+        const todosTexts = newTodos.map((todo) => todo.text )
+        return {
+            indexTodo,
+            newTodos,
+            todosTexts
+        }
+    }
 
-        const dataArrayText = newTodos.map((todo) => todo.text )
-
-        !dataArrayText.includes(text) 
+    const addTodo = (text) => {
+        const { newTodos, todosTexts } = getNewTodos(text)
+        !todosTexts.includes(text) 
             ? newTodos.push({ 
                 id: crypto.randomUUID(),
                 date: getDate(dateM),
@@ -48,39 +56,37 @@ function TodoProvider({ children }) {
     }
     
     const checkTodo = (text) => {
-        const newTodos = [...todos];
-        const todoIndex = newTodos.findIndex((todo) => todo.text == text)
-        newTodos[todoIndex].completed = !newTodos[todoIndex].completed;
+        const { indexTodo, newTodos } = getNewTodos(text)
+        newTodos[indexTodo].completed = !newTodos[indexTodo].completed;
         return saveTodos(newTodos)
     }
 
     const deleteTodo = (text) => {
-        const newTodos = [...todos];
-        const todoIndex = newTodos.findIndex((todo) => todo.text == text)
-        newTodos.splice(todoIndex, 1)
+        const { indexTodo, newTodos } = getNewTodos(text)
+        newTodos.splice(indexTodo, 1)
         return saveTodos(newTodos)
     }
 
     return (
         <TodoContext.Provider value={{
-                todos,
-                loading,
-                error,
-                totalTodos,
-                completedTodo,
-                searchValue,
-                setSearchValue,
-                searchedTodos,
-                checkTodo,
-                deleteTodo,
-                openModal,
-                setOpenModal,
                 addTodo,
-                tab,
-                setTab,
+                checkTodo,
+                completedTodo,
                 dateM,
+                deleteTodo,
+                error,
+                listTasksDay,
+                loading,
+                openModal,
+                searchValue,
+                searchedTodos,
                 setDateM,
-                listTasksDay
+                setOpenModal,
+                setSearchValue,
+                setTab,
+                tab,
+                todos,
+                totalTodos,
             }}>
             {children}
         </TodoContext.Provider>
